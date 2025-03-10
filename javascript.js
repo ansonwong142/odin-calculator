@@ -9,11 +9,15 @@ const numberButtons = document.querySelectorAll(".number");
 const operatorButtons = document.querySelectorAll(".operator");
 const equalButton = document.querySelector(".equal");
 
-equalButton.addEventListener("click", () => operate());
+equalButton.addEventListener("click", () => {
+    if (previousNumber != "" && currentNumber != "") {
+        operate();
+    }
+});
 
-numberButtons.forEach(button =>
-    button.addEventListener("click", e => processNumber(e.target.textContent))
-);
+numberButtons.forEach(button => {
+    button.addEventListener("click", e => processNumber(e.target.textContent));
+});
 
 function processNumber(number) {
     currentNumber += number;
@@ -39,7 +43,19 @@ function operate() {
     if (operator === "+") {
         previousNumber = add(previousNumber, currentNumber);
     }
-
+    else if (operator === "-") {
+        previousNumber = subtract(previousNumber, currentNumber);
+    }
+    else if (operator === "x") {
+        previousNumber = multiply(previousNumber, currentNumber);
+    }
+    else if (operator === "/") {
+        previousNumber = divide(previousNumber, currentNumber);
+    }
+    previousDisplayNumber.textContent = "0";
+    currentDisplayNumber.textContent = previousNumber;
+    operator = "";
+    currentNumber = "";
 }
 
 
