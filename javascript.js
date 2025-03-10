@@ -7,6 +7,15 @@ const previousDisplayNumber = document.querySelector(".previousNumber");
 
 const numberButtons = document.querySelectorAll(".number");
 const operatorButtons = document.querySelectorAll(".operator");
+const clearButton = document.querySelector(".clear");
+clearButton.addEventListener("click", function(){
+    currentNumber= "";
+    previousNumber="";
+    operator="";
+    previousDisplayNumber.textContent = "";
+    currentDisplayNumber.textContent = "0";
+});
+
 const equalButton = document.querySelector(".equal");
 
 equalButton.addEventListener("click", () => {
@@ -52,7 +61,7 @@ function operate() {
     else if (operator === "/") {
         previousNumber = divide(previousNumber, currentNumber);
     }
-    previousDisplayNumber.textContent = "0";
+    previousDisplayNumber.textContent = "";
     currentDisplayNumber.textContent = previousNumber;
     operator = "";
     currentNumber = "";
