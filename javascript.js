@@ -8,10 +8,10 @@ const previousDisplayNumber = document.querySelector(".previousNumber");
 const numberButtons = document.querySelectorAll(".number");
 const operatorButtons = document.querySelectorAll(".operator");
 const clearButton = document.querySelector(".clear");
-clearButton.addEventListener("click", function(){
-    currentNumber= "";
-    previousNumber="";
-    operator="";
+clearButton.addEventListener("click", function () {
+    currentNumber = "";
+    previousNumber = "";
+    operator = "";
     previousDisplayNumber.textContent = "";
     currentDisplayNumber.textContent = "0";
 });
@@ -38,11 +38,28 @@ operatorButtons.forEach(button =>
 );
 
 function processOperator(pressedOperator) {
-    operator = pressedOperator;
-    previousNumber = currentNumber;
-    currentNumber = "";
-    previousDisplayNumber.textContent = previousNumber + " " + operator;
-    currentDisplayNumber.textContent = "0";
+    if (previousNumber === "") {
+        previousNumber = currentNumber;
+        operator = pressedOperator;
+        currentNumber = "";
+        //previousDisplayNumber.textContent = previousNumber + " " + operator;
+        previousDisplayNumber.textContent = roundDisplayNumber(previousNumber) + " " + operator;
+        currentDisplayNumber.textContent = "0";
+    }
+    else if (currentNumber === "") {
+        operator = pressedOperator;
+        //currentNumber = "";
+        //previousDisplayNumber.textContent = previousNumber + " " + operator;
+        previousDisplayNumber.textContent = roundDisplayNumber(previousNumber) + " " + operator;
+        currentDisplayNumber.textContent = "0";
+    }
+    else {
+        operate();
+        operator = pressedOperator;
+        //previousDisplayNumber.textContent = previousNumber + " " + operator;
+        previousDisplayNumber.textContent = roundDisplayNumber(previousNumber) + " " + operator;
+        currentDisplayNumber.textContent = "0";
+    }
 }
 
 function operate() {
@@ -59,14 +76,31 @@ function operate() {
         previousNumber = multiply(previousNumber, currentNumber);
     }
     else if (operator === "/") {
+        if (currentNumber === 0) {
+            previousNumber = "Can't divide by 0";
+            previousDisplayNumber.textContent = previousNumber;
+            currentDisplayNumber.textContent = "";
+            operator = "";
+            currentNumber = "";
+            return
+        }
         previousNumber = divide(previousNumber, currentNumber);
     }
+    previousNumber = previousNumber.toString();
+    currentDisplayNumber.textContent = roundDisplayNumber(previousNumber);
     previousDisplayNumber.textContent = "";
-    currentDisplayNumber.textContent = previousNumber;
     operator = "";
     currentNumber = "";
 }
 
+function roundDisplayNumber(number) {
+    if (number.length < 10) {
+        return number;
+    }
+    else {
+        return number.slice(0, 9) + "...";
+    }
+}
 
 
 
