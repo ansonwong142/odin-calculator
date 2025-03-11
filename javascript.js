@@ -16,8 +16,20 @@ clearButton.addEventListener("click", function () {
     currentDisplayNumber.textContent = "0";
 });
 
-const equalButton = document.querySelector(".equal");
+const decimalButton = document.querySelector(".decimal");
+decimalButton.addEventListener("click", function () {
+    if (!currentNumber.includes(".")) {
+        if (currentNumber === "") {
+            currentNumber += "0.";
+        }
+        else {
+            currentNumber += ".";
+        }
+        currentDisplayNumber.textContent = currentNumber;
+    }
+});
 
+const equalButton = document.querySelector(".equal");
 equalButton.addEventListener("click", () => {
     if (previousNumber != "" && currentNumber != "") {
         operate();
@@ -48,7 +60,6 @@ function processOperator(pressedOperator) {
     }
     else if (currentNumber === "") {
         operator = pressedOperator;
-        //currentNumber = "";
         //previousDisplayNumber.textContent = previousNumber + " " + operator;
         previousDisplayNumber.textContent = roundDisplayNumber(previousNumber) + " " + operator;
         currentDisplayNumber.textContent = "0";
