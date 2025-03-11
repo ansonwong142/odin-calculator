@@ -23,17 +23,18 @@ button{
     width: 30px;
 }
 
-.output{
+.top{
+    display: flex;
     align-items: center;
 }
 
 .display{
     padding: 0 5px;
-    height: 40px;
     flex: 1;
     background-color: #D3D3D3;
     border: 2px solid black;
     border-radius: 5px;
+    height: 60px;
 }
 
 .previousNumber{
@@ -42,4 +43,10 @@ button{
 
 .output{
     display: flex;
+}
+
+.rightside{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
