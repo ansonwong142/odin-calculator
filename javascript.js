@@ -8,13 +8,7 @@ const previousDisplayNumber = document.querySelector(".previousNumber");
 const numberButtons = document.querySelectorAll(".number");
 const operatorButtons = document.querySelectorAll(".operator");
 const clearButton = document.querySelector(".clear");
-clearButton.addEventListener("click", function () {
-    currentNumber = "";
-    previousNumber = "";
-    operator = "";
-    previousDisplayNumber.textContent = "";
-    currentDisplayNumber.textContent = "0";
-});
+clearButton.addEventListener("click", clear);
 
 const backspaceButton = document.querySelector(".backspace");
 backspaceButton.addEventListener("click", function () {
@@ -99,7 +93,7 @@ function operate() {
     }
     else if (operator === "/") {
         if (currentNumber === 0) {
-            previousNumber = "Can't divide by 0";
+            previousNumber = "Can't divide by 0. Please clear calculator.";
             previousDisplayNumber.textContent = previousNumber;
             currentDisplayNumber.textContent = "";
             operator = "";
@@ -113,6 +107,14 @@ function operate() {
     previousDisplayNumber.textContent = "";
     operator = "";
     currentNumber = "";
+}
+
+function clear () {
+    currentNumber = "";
+    previousNumber = "";
+    operator = "";
+    previousDisplayNumber.textContent = "";
+    currentDisplayNumber.textContent = "0";
 }
 
 function roundDisplayNumber(number) {
