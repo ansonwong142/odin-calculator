@@ -17,11 +17,13 @@ clearButton.addEventListener("click", function () {
 });
 
 const backspaceButton = document.querySelector(".backspace");
-backspaceButton.addEventListener("click", function(){
-    currentNumber = currentNumber.slice(0,-1);
-    currentDisplayNumber.textContent = currentNumber;
-    if (currentNumber===""){
-        currentDisplayNumber.textContent = previousNumber;
+backspaceButton.addEventListener("click", function () {
+    if (currentNumber && currentNumber != "0") {
+        currentNumber = currentNumber.slice(0, -1);
+        currentDisplayNumber.textContent = currentNumber;
+        if (!currentNumber){
+            currentDisplayNumber.textContent = "0";
+        }
     }
 });
 
